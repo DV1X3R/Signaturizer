@@ -1,0 +1,3 @@
+[submodule "SwCrypt"]
+	path = SwCrypt
+	url = https://github.com/soyersoyer/SwCrypt.git
