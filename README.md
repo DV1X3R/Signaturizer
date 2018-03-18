@@ -11,4 +11,6 @@ Features implemented:
 * Base64 Coding / Decoding
 
 Looks like this:
-![Screenshot](Signaturizer 1.1.png)
+<p align="center">
+<img src="https://github.com/DV1X3R/Signaturizer/raw/master/Signaturizer%201.1.png" />
+</p>
