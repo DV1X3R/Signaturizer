@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,8 +15,13 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Signaturizer" customModuleProvider="target">
             <connections>
-                <outlet property="slHash" destination="kDs-kk-hUk" id="K5X-E7-Gnw"/>
-                <outlet property="tfHash" destination="az0-6u-4pE" id="FhR-dP-zZ8"/>
+                <outlet property="DataTF" destination="w1b-Ui-FwO" id="gTm-W4-XA1"/>
+                <outlet property="PassphraseSTF" destination="wWS-r8-ZK5" id="Nqr-7q-0VN"/>
+                <outlet property="PrivateKeyTV" destination="u36-SN-Zoa" id="AIJ-gT-gJ7"/>
+                <outlet property="PublicKeyTV" destination="W0o-Oj-oh1" id="gah-Yu-L28"/>
+                <outlet property="SignatureTF" destination="SBK-mH-1uU" id="k3G-ih-nca"/>
+                <outlet property="StuffResultTF" destination="G4w-aA-hEh" id="hVv-fJ-xxJ"/>
+                <outlet property="StuffSelectorPUB" destination="kDs-kk-hUk" id="px9-sd-ScK"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -682,54 +688,190 @@
             </items>
         </menu>
         <window title="Signaturizer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="750" height="62"/>
+            <rect key="contentRect" x="335" y="390" width="785" height="222"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="750" height="62"/>
+                <rect key="frame" x="0.0" y="0.0" width="785" height="222"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kDs-kk-hUk" userLabel="slHash">
-                        <rect key="frame" x="566" y="17" width="88" height="26"/>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-Ui-FwO" userLabel="Data">
+                        <rect key="frame" x="20" y="180" width="540" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" title="SHA256" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="rWu-b6-42f" id="df9-ua-S9s" userLabel="Pup Up Button">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="Data" drawsBackground="YES" id="az0-6u-4pE" userLabel="Data">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="doStuff:" target="Voe-Tx-rLC" id="GQ3-eK-x11"/>
+                        </connections>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4w-aA-hEh" userLabel="StuffResult">
+                        <rect key="frame" x="20" y="150" width="745" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" state="on" borderStyle="bezel" placeholderString="Stuff result" drawsBackground="YES" id="pNv-Yu-Zmg" userLabel="StuffResult">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBK-mH-1uU" userLabel="Signature">
+                        <rect key="frame" x="20" y="120" width="745" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="Signature" drawsBackground="YES" id="CUE-Ca-Z5X" userLabel="Signature">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="signData:" target="Voe-Tx-rLC" id="wl9-EW-CgX"/>
+                        </connections>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kDs-kk-hUk" userLabel="StuffSelector">
+                        <rect key="frame" x="566" y="177" width="117" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" title="RSA Encrypt" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F8g-31-f1j" id="df9-ua-S9s" userLabel="StuffSelector">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="r0h-F4-onl">
                                 <items>
-                                    <menuItem title="SHA256" state="on" id="rWu-b6-42f" userLabel="SHA256"/>
+                                    <menuItem title="RSA Encrypt" state="on" id="F8g-31-f1j" userLabel="EnRSA"/>
+                                    <menuItem title="RSA Decrypt" id="hnd-A9-lZx" userLabel="DeRSA"/>
+                                    <menuItem title="Sign Data" id="jwi-p6-h71" userLabel="Sign"/>
+                                    <menuItem title="Verify Signature" id="PW5-RL-uQ2" userLabel="Verify"/>
+                                    <menuItem title="SHA256" id="rWu-b6-42f" userLabel="SHA256"/>
                                     <menuItem title="MD5" id="rka-nM-mdN" userLabel="MD5"/>
+                                    <menuItem title="Base64" id="Rqe-vR-Mot" userLabel="Base64"/>
+                                    <menuItem title="Base64 Decode" id="Tdw-jM-Aeq" userLabel="DeBase64"/>
+                                    <menuItem title="UUID Generator" id="u7Q-el-DdN" userLabel="UUID"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-Ui-FwO" userLabel="tfHash">
-                        <rect key="frame" x="20" y="20" width="540" height="22"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cfu-E3-RvR" userLabel="StuffButton">
+                        <rect key="frame" x="682" y="173" width="89" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="az0-6u-4pE" userLabel="Text Field">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            <connections>
-                                <action selector="updateTfHash:" target="Voe-Tx-rLC" id="XTQ-wb-7RV"/>
-                            </connections>
-                        </textFieldCell>
-                    </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cfu-E3-RvR" userLabel="btnHash">
-                        <rect key="frame" x="653" y="13" width="83" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Hash It" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hPr-sQ-1Ha" userLabel="Button">
+                        <buttonCell key="cell" type="push" title="Do stuff" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hPr-sQ-1Ha" userLabel="StuffButton">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <connections>
-                                <action selector="updateTfHash:" target="Voe-Tx-rLC" id="z8R-aC-a5K"/>
-                            </connections>
                         </buttonCell>
+                        <connections>
+                            <action selector="doStuff:" target="Voe-Tx-rLC" id="8HH-Qv-ARV"/>
+                        </connections>
                     </button>
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHl-TO-r5Y" userLabel="PrivateKey">
+                        <rect key="frame" x="20" y="20" width="270" height="67"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" ambiguous="YES" id="TMA-69-3ym">
+                            <rect key="frame" x="1" y="1" width="268" height="65"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="u36-SN-Zoa" userLabel="PrivateKey">
+                                    <rect key="frame" x="0.0" y="0.0" width="268" height="65"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="268" height="65"/>
+                                    <size key="maxSize" width="672" height="10000000"/>
+                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="z5h-yX-8ce">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lfo-Zz-e8I">
+                            <rect key="frame" x="253" y="1" width="16" height="65"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9H-2L-eLp" userLabel="PublicKey">
+                        <rect key="frame" x="298" y="20" width="270" height="67"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" ambiguous="YES" id="u5Y-Uq-fR9">
+                            <rect key="frame" x="1" y="1" width="268" height="65"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="W0o-Oj-oh1" userLabel="PublicKey">
+                                    <rect key="frame" x="0.0" y="0.0" width="268" height="65"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="268" height="65"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="pvn-vi-f3F">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="vsw-kB-QTT">
+                            <rect key="frame" x="253" y="1" width="16" height="65"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <box fixedFrame="YES" title="Private Key Encryption" translatesAutoresizingMaskIntoConstraints="NO" id="PVK-Nx-Db4">
+                        <rect key="frame" x="574" y="16" width="194" height="96"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="p2K-6Y-Mix">
+                            <rect key="frame" x="2" y="2" width="190" height="79"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yFL-l6-Cmh" userLabel="PassphraseButton">
+                                    <rect key="frame" x="14" y="40" width="162" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="push" title="Encrypt / Decrypt" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pox-w4-Ige" userLabel="PkEncryptButton">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="cryptPrivateKey:" target="Voe-Tx-rLC" id="z9C-bQ-xRg"/>
+                                    </connections>
+                                </button>
+                                <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWS-r8-ZK5" userLabel="Passphrase">
+                                    <rect key="frame" x="20" y="17" width="150" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="passphrase" drawsBackground="YES" usesSingleLineMode="YES" id="8Zn-tT-Qdx" userLabel="PkPassword">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <allowedInputSourceLocales>
+                                            <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                        </allowedInputSourceLocales>
+                                    </secureTextFieldCell>
+                                    <connections>
+                                        <action selector="cryptPrivateKey:" target="Voe-Tx-rLC" id="LUl-7U-ZJN"/>
+                                    </connections>
+                                </secureTextField>
+                            </subviews>
+                        </view>
+                    </box>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48C-in-QoW">
+                        <rect key="frame" x="18" y="95" width="104" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RSA Private key:" id="gsz-9P-cyL">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Twc-dM-cec">
+                        <rect key="frame" x="296" y="95" width="99" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RSA Public key:" id="kax-6M-9km">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="249" y="23"/>
+            <point key="canvasLocation" x="268.5" y="-47"/>
         </window>
     </objects>
 </document>
