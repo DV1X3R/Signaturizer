@@ -18,4 +18,4 @@ Looks like this:
 Download
 --------
 
-[Signaturizer 1.1 (macOS)](https://github.com/DV1X3R/Signaturizer/raw/master/bin-stable/Signaturizer%201.1.zip)
+[Signaturizer 1.1 - macOS](https://github.com/DV1X3R/Signaturizer/raw/master/bin-stable/Signaturizer%201.1.zip) (updated: 29. April 2018)
