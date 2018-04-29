@@ -12,5 +12,10 @@ Features implemented:
 
 Looks like this:
 <p align="center">
-<img src="https://github.com/DV1X3R/Signaturizer/raw/master/Signaturizer%201.1.png" />
+<img src="https://github.com/DV1X3R/Signaturizer/raw/master/bin-stable/Signaturizer%201.1.png" />
 </p>
+
+Download
+--------
+
+[Signaturizer 1.1 (macOS)](https://github.com/DV1X3R/Signaturizer/raw/master/bin-stable/Signaturizer%201.1.app)
